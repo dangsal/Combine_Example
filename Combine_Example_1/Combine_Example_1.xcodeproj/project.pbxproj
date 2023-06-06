@@ -21,6 +21,7 @@
 		D7AEF23E2A2F5F5500CC1B73 /* ArticleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AEF23D2A2F5F5500CC1B73 /* ArticleList.swift */; };
 		D7AEF2412A2F5F7500CC1B73 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AEF2402A2F5F7500CC1B73 /* ArticleTableViewCell.swift */; };
 		D7AEF2432A2F5F9C00CC1B73 /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AEF2422A2F5F9C00CC1B73 /* ArticleViewModel.swift */; };
+		D7AEF2462A2F60A600CC1B73 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AEF2452A2F60A600CC1B73 /* WebService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		D7AEF23D2A2F5F5500CC1B73 /* ArticleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleList.swift; sourceTree = "<group>"; };
 		D7AEF2402A2F5F7500CC1B73 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
 		D7AEF2422A2F5F9C00CC1B73 /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
+		D7AEF2452A2F60A600CC1B73 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				D7AEF2382A2F5B6200CC1B73 /* SupportingFiles */,
+				D7AEF2442A2F609100CC1B73 /* WebService */,
 				D7AEF2372A2F5B4A00CC1B73 /* Models */,
 				D7AEF2362A2F5B4200CC1B73 /* Views */,
 				D7AEF2352A2F5B3B00CC1B73 /* ViewModels */,
@@ -180,6 +183,14 @@
 				D7AEF2402A2F5F7500CC1B73 /* ArticleTableViewCell.swift */,
 			);
 			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		D7AEF2442A2F609100CC1B73 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				D7AEF2452A2F60A600CC1B73 /* WebService.swift */,
+			);
+			path = WebService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7AEF2462A2F60A600CC1B73 /* WebService.swift in Sources */,
 				D7AEF23C2A2F5DF500CC1B73 /* Article.swift in Sources */,
 				D7AEF2432A2F5F9C00CC1B73 /* ArticleViewModel.swift in Sources */,
 				D7AEF20A2A2F5AAA00CC1B73 /* NewsViewController.swift in Sources */,

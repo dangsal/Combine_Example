@@ -5,6 +5,7 @@
 //  Created by 이성호 on 2023/06/06.
 //
 
+import Combine
 import UIKit
 
 final class NewsViewController: UIViewController {
@@ -20,7 +21,8 @@ final class NewsViewController: UIViewController {
     
     // MARK: - property
     
-    private var articleListViewModel: ArticleListViewModel?
+    private var articleListViewModel: ArticleListViewModel? = ArticleListViewModel()
+    private var cancelBag = Set<AnyCancellable>()
 
     // MARK: - life cycle
     
@@ -29,6 +31,9 @@ final class NewsViewController: UIViewController {
         self.setupLayout()
         self.setupDelegation()
         self.setupNavigationBar()
+        self.setBinding()
+        self.fetchArticles()
+        
     }
 
     // MARK: - func
@@ -49,6 +54,19 @@ final class NewsViewController: UIViewController {
     private func setupNavigationBar() {
         self.navigationItem.title = "News"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    private func fetchArticles() {
+        articleListViewModel?.requestArticles()
+    }
+    
+    private func setBinding() {
+        self.articleListViewModel?.$articles
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
+            .store(in: &self.cancelBag)
     }
 }
 
