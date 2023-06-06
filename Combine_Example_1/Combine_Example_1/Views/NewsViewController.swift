@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class NewsViewController: UIViewController {
     
     // MARK: - ui components
     
@@ -17,6 +17,10 @@ final class ViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
+    
+    // MARK: - property
+    
+    private var articleListViewModel: ArticleListViewModel?
 
     // MARK: - life cycle
     
@@ -24,6 +28,7 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         self.setupLayout()
         self.setupDelegation()
+        self.setupNavigationBar()
     }
 
     // MARK: - func
@@ -40,19 +45,28 @@ final class ViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
+    
+    private func setupNavigationBar() {
+        self.navigationItem.title = "News"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
 }
 
-extension ViewController: UITableViewDataSource {
+extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        guard let articleListViewModel = self.articleListViewModel else { return 0 }
+        return articleListViewModel.numberOfRowsInSection(section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "123"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ArticleTableViewCell
+        
+        guard let articleListViewModel = self.articleListViewModel else { return UITableViewCell() }
+        let articleViewModel = articleListViewModel.articleAtIndex(indexPath.row)
+        cell.configurelable(article: articleViewModel)
         return cell
     }
 }
 
-extension ViewController: UITableViewDelegate { }
+extension NewsViewController: UITableViewDelegate { }
 
