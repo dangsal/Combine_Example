@@ -15,7 +15,7 @@ final class NewsViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ArticleTableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
     
@@ -40,10 +40,10 @@ final class NewsViewController: UIViewController {
     
     private func setupLayout() {
         self.view.addSubview(self.tableView)
-        self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        self.tableView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
     
     private func setupDelegation() {
@@ -63,10 +63,10 @@ final class NewsViewController: UIViewController {
     private func setBinding() {
         self.articleListViewModel?.$articles
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] _ in
-                self?.tableView.reloadData()
+            .sink(receiveValue: { value in
+                self.tableView.reloadData()
             })
-            .store(in: &self.cancelBag)
+            .store(in: &cancelBag)
     }
 }
 

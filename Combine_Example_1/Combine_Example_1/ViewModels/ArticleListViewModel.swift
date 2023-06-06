@@ -12,7 +12,6 @@ import Foundation
 class ArticleListViewModel {
     
     @Published var articles: [Article] = []
-    var cancelBag = Set<AnyCancellable>()
     
     var numberOfSections: Int {
         return 1
@@ -29,16 +28,14 @@ class ArticleListViewModel {
     }
     
     func requestArticles() {
-        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=e9b514c39c5f456db8ed4ecb693b0040") else { return }
-        
-        URLSession.shared.dataTaskPublisher(for: url)
-            .map(\.data)
-            .decode(type: [Article].self, decoder: JSONDecoder())
-            .print()
-            .replaceError(with: [])
-            .assign(to: \.articles, on: self)
-            .store(in: &self.cancelBag)
-        print(articles.count)
+        WebService().fetchArticles { [weak self] result in
+            switch result {
+            case .success(let articles):
+                self?.articles = articles
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
 }
