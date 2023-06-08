@@ -457,3 +457,36 @@ let tryMapPublisher = [1, 2, nil, 6].publisher
             print("끝~")
         }
     }, receiveValue: { print($0) })
+
+print("---------------------MapError---------------------")
+
+enum AnyError: Error {
+    case any
+}
+
+func checkNilElement(element: Int?) throws -> Int {
+    guard let element = element else {
+        throw AnyError.any
+    }
+    return element
+}
+
+let mapErrorPublisher = [1, 2, nil ,5].publisher
+    .tryMap { try checkNilElement(element: $0) }
+    .mapError{ $0 as? DangsalError ?? .elementIsNil }
+    .sink {
+        switch $0 {
+        case .failure(let error):
+            if error == .elementIsNil {
+                print("element error")
+            }
+            else {
+                print(error.localizedDescription)
+            }
+        case .finished:
+            print("끝")
+        }
+    } receiveValue: { value in
+        print(value)
+    }
+
