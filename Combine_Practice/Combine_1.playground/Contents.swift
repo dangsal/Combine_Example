@@ -490,3 +490,11 @@ let mapErrorPublisher = [1, 2, nil ,5].publisher
         print(value)
     }
 
+print("-------------------------scan------------------------------")
+
+let scanPublisher = [1, 2 ,3 ,4 ,5 ,6].publisher
+    .scan(0) { (latest, current) -> Int in
+        print("latest: \(latest), current: \(current)")
+        return latest + current
+    }
+    .sink(receiveValue: { print($0) })
