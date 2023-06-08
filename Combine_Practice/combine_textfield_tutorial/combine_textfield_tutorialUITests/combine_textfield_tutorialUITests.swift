@@ -1,13 +1,13 @@
 //
-//  Combine_Example_1UITests.swift
-//  Combine_Example_1UITests
+//  combine_textfield_tutorialUITests.swift
+//  combine_textfield_tutorialUITests
 //
-//  Created by 이성호 on 2023/06/06.
+//  Created by 이성호 on 2023/06/05.
 //
 
 import XCTest
 
-final class Combine_Example_1UITests: XCTestCase {
+final class combine_textfield_tutorialUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

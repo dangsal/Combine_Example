@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  Combine_Example_1
+//  combine_textfield_tutorial
 //
-//  Created by 이성호 on 2023/06/06.
+//  Created by 이성호 on 2023/06/05.
 //
 
 import UIKit
