@@ -415,3 +415,21 @@ intPulisherMap
         return element * 2
     }
     .sink(receiveValue: { print($0) })
+
+print("-------map keypath---------")
+
+struct Point {
+    let x: Int
+    let y: Int
+    let z: Int
+}
+
+let pointPublisher = PassthroughSubject<Point, Never>()
+
+pointPublisher
+    .map(\.x, \.y, \.z)
+    .sink(receiveValue: { x, y, z in
+        print("x: \(x), y: \(y), z: \(z)")
+        })
+    
+pointPublisher.send(Point(x: 1, y: 2, z: 3))
