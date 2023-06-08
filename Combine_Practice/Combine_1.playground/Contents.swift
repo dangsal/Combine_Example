@@ -433,3 +433,27 @@ pointPublisher
         })
     
 pointPublisher.send(Point(x: 1, y: 2, z: 3))
+
+print("-------------------trymap-------------")
+
+enum DangsalError: Error {
+    case elementIsNil
+}
+
+func checkNil(element: Int?) throws -> Int {
+    guard let element = element else {
+        throw DangsalError.elementIsNil
+    }
+    return element
+}
+
+let tryMapPublisher = [1, 2, nil, 6].publisher
+    .tryMap { try checkNil(element: $0) }
+    .sink(receiveCompletion: {
+        switch $0 {
+        case .failure(let error):
+            print(error.localizedDescription)
+        case .finished:
+            print("끝~")
+        }
+    }, receiveValue: { print($0) })
