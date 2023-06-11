@@ -550,3 +550,17 @@ publisherEx2
     .filter { $0 % 2 == 0 }
     .map { $0 * $0 }
     .assign(to: \.value, on: dumper)
+
+print("-------------------- example @Published -------------------------------")
+
+class SomeModel {
+    @Published var name = "Dangsal"
+}
+
+let someModel = SomeModel()
+
+let namePublisher = someModel.$name
+    .filter { $0.count > 0 }
+    .sink { value in
+        print("name is \(value)")
+    }
