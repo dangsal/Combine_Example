@@ -498,3 +498,25 @@ let scanPublisher = [1, 2 ,3 ,4 ,5 ,6].publisher
         return latest + current
     }
     .sink(receiveValue: { print($0) })
+
+print("-------------------------PassthroughSubject------------------------------")
+
+let stringStream = PassthroughSubject<String, Never>()
+
+let fristStream = stringStream
+    .sink(receiveCompletion: { completion in
+        print("completion: \(completion)")
+    }, receiveValue: { value in
+        print("value: \(value)")
+    })
+
+stringStream.send("첫번째 send")
+
+let secondStream = stringStream
+    .sink(receiveCompletion: { completion in
+        print("completion2: \(completion)")
+    }, receiveValue: { value in
+        print("value2: \(value)")
+    })
+
+stringStream.send("두번째 send")
