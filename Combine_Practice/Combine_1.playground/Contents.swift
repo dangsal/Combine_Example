@@ -520,3 +520,33 @@ let secondStream = stringStream
     })
 
 stringStream.send("두번째 send")
+
+print("------------------------- example Sequence.publisher ------------------------------")
+
+let publisherEx = [1, 2, 3, 4, 5, 6].publisher
+
+publisherEx
+    .filter { $0 % 2 == 0 }
+    .map { $0 * $0 }
+    .sink { value in
+        print("value: \(value)")
+    }
+
+
+print("-------------------- example assign -------------------------------")
+
+class Dumper {
+    var value = 0 {
+        didSet {
+            print("value was updated to \(value)")
+        }
+    }
+}
+
+let dumper = Dumper()
+print(dumper.value)
+let publisherEx2 = [1, 2, 3, 4, 5, 6, 7].publisher
+publisherEx2
+    .filter { $0 % 2 == 0 }
+    .map { $0 * $0 }
+    .assign(to: \.value, on: dumper)
